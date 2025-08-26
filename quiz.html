@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quaqzz</title>
+
+  <!-- Bootstrap & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Video -->
+  <div id="background-video-container">
+    <video autoplay muted loop id="background-video">
+      <source src="./vecteezy_quiz-neon-line-animation-with-option-selection-on-black_42693335.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand fancy-logo" href="./index.html">Quaqzz</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="restartQuiz()">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Panels -->
+  <div class="card p-4 mb-3" id="role-selection">
+    <h3>Are you a Teacher or Student?</h3>
+    <button class="btn btn-primary w-75 mb-2 p-2" onclick="showLogin('teacher')">Teacher</button>
+    <button class="btn btn-primary w-75 p-2" onclick="showLogin('student')">Student</button>
+  </div>
+
+  <div id="teacher-login" class="card p-4 mb-3 d-none">
+    <h3>Teacher Login</h3>
+    <input type="text" id="teacher-name" class="form-control mb-3 rounded-pill p-2" placeholder="Username" />
+    <input type="password" id="teacher-password" class="form-control mb-3 rounded-pill p-2" placeholder="Password" />
+    <button class="btn btn-primary w-25 rounded-pill" onclick="login('teacher')">Log in</button>
+    <p>Don't have an account? <a href="./signup_form.html">Create one</a></p>
+  </div>
+
+  <div id="student-login" class="card p-4 d-none">
+    <h3>Student Login</h3>
+    <input type="text" id="student-name" class="form-control mb-3 rounded-pill p-2" placeholder="Username" />
+    <input type="password" id="student-password" class="form-control mb-3 rounded-pill p-2" placeholder="Password" />
+    <button class="btn btn-primary w-25 rounded-pill" onclick="login('student')">Log in</button>
+    <p>Don't have an account? <a href="./signup_form.html">Create one</a></p>
+  </div>
+
+  <div class="card p-4 d-none" id="teacher-panel">
+    <h3 class="mb-3">Create a Question</h3>
+    <input type="text" id="new-question" class="form-control mb-2" placeholder="Enter question" />
+    <input type="text" id="option1" class="form-control mb-2" placeholder="Option 1" />
+    <input type="text" id="option2" class="form-control mb-2" placeholder="Option 2" />
+    <input type="text" id="option3" class="form-control mb-2" placeholder="Option 3" />
+    <input type="text" id="option4" class="form-control mb-2" placeholder="Option 4" />
+    <input type="text" id="correct-answer" class="form-control mb-2" placeholder="Correct answer" />
+    <input type="number" id="question-time" class="form-control mb-3" placeholder="Time limit (seconds)" />
+    <button class="btn btn-success w-100 mb-3" onclick="addQuestion()">Add Question</button>
+    <h4 class="mt-4">Review/Edit Questions</h4>
+    <ul class="list-group mb-3" id="question-list"></ul>
+    <button class="btn btn-danger w-100" onclick="restartQuiz()">Logout</button>
+  </div>
+
+  <div class="card p-4 d-none" id="quiz-panel">
+    <p id="question-progress" class="text-muted fw-bold mb-1"></p>
+    <h3 id="quiz-question"></h3>
+    <div id="quiz-options" class="mb-3"></div>
+    <button class="btn btn-primary w-100" onclick="submitAnswer()">Submit Answer</button>
+    <p class="mt-3 text-end">Time left: <span id="timer">30</span> seconds</p>
+  </div>
+
+  <div class="card p-4 d-none" id="results-panel">
+    <h3>Quiz Completed!</h3>
+    <p id="result-text"></p>
+    <button class="btn btn-secondary w-100" onclick="restartQuiz()">Restart</button>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
